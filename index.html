@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fi">
 <head>
@@ -12,13 +13,15 @@
       color: #000;
       margin: 2em;
     }
-    label, input, select {
+    label, input {
       display: block;
       margin: 0.5em 0;
     }
-    input, select {
+    input {
       padding: 0.4em;
       font-family: 'Playfair Display', serif;
+      width: 100%;
+      max-width: 400px;
     }
     button {
       margin-top: 1em;
@@ -66,8 +69,10 @@
   <label for="extras">Lisäkustannukset (€):</label>
   <input type="number" id="extras" />
 
-  <button id="calculate" onclick="calculate()">Laske tarjous</button>
-  <button id="reset" onclick="resetForm()">Tyhjennä</button>
+  <div>
+    <button id="calculate" onclick="calculate()">Laske tarjous</button>
+    <button id="reset" onclick="resetForm()">Tyhjennä</button>
+  </div>
 
   <div id="result"></div>
 
