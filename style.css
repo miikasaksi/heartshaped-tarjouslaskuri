@@ -17,7 +17,7 @@
 
 body {
   margin: 0;
-  padding: 24px;
+  padding: 16px;
   background: var(--bg);
   color: var(--text);
   font-family: "Manrope", sans-serif;
@@ -29,9 +29,9 @@ body {
 }
 
 .eyebrow {
-  margin: 16px 0 6px;
+  margin: 8px 0 6px;
   text-align: center;
-  font-size: 20px;
+  font-size: 12px;
   letter-spacing: 0.09em;
   color: var(--muted);
   font-weight: 700;
@@ -42,16 +42,16 @@ h1 {
   text-align: center;
   color: var(--accent);
   font-family: "Playfair Display", serif;
-  font-size: clamp(42px, 6vw, 64px);
+  font-size: clamp(36px, 5vw, 52px);
   line-height: 1.1;
 }
 
 .lead {
-  margin: 16px auto 34px;
+  margin: 10px auto 24px;
   max-width: 760px;
   text-align: center;
   color: var(--muted);
-  font-size: 31px;
+  font-size: 18px;
 }
 
 .card {
@@ -59,7 +59,7 @@ h1 {
   border: 1px solid var(--surface-border);
   border-radius: 20px;
   box-shadow: 0 8px 26px rgba(105, 65, 89, 0.08);
-  padding: 30px;
+  padding: 22px;
 }
 
 .field-grid {
@@ -75,7 +75,7 @@ h1 {
 }
 
 .field span {
-  font-size: 30px;
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -84,8 +84,8 @@ input {
   border: 1px solid var(--input-border);
   background: var(--input-bg);
   border-radius: 14px;
-  padding: 14px 16px;
-  font-size: 32px;
+  padding: 12px 14px;
+  font-size: 18px;
   font-family: "Manrope", sans-serif;
   color: var(--text);
 }
@@ -106,7 +106,7 @@ input:focus {
 
 .note p {
   margin: 0;
-  font-size: 27px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -125,9 +125,9 @@ input:focus {
 .btn {
   border: 1px solid transparent;
   border-radius: 14px;
-  padding: 12px 22px;
+  padding: 10px 18px;
   font-family: "Manrope", sans-serif;
-  font-size: 30px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   transition: 0.18s ease;
@@ -175,7 +175,7 @@ input:focus {
 
 .summary h2 {
   margin: 0 0 10px;
-  font-size: 48px;
+  font-size: 36px;
   line-height: 1.1;
   font-family: "Playfair Display", serif;
   color: var(--accent);
@@ -191,12 +191,12 @@ input:focus {
 }
 
 .summary-row span {
-  font-size: 33px;
+  font-size: 16px;
   color: #6d626d;
 }
 
 .summary-row strong {
-  font-size: 33px;
+  font-size: 16px;
   color: #443a44;
   font-weight: 700;
   white-space: nowrap;
@@ -226,7 +226,7 @@ input:focus {
   }
 
   .lead {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .field span,
@@ -235,13 +235,30 @@ input:focus {
   .note p,
   .summary-row span,
   .summary-row strong {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .summary h2,
   .eyebrow {
-    font-size: 28px;
+    font-size: 24px;
   }
+}
+
+body.embed {
+  padding: 0;
+  background: transparent;
+}
+
+body.embed .page {
+  max-width: none;
+}
+
+body.embed .eyebrow {
+  margin-top: 0;
+}
+
+body.embed .card {
+  box-shadow: none;
 }
 
 @media print {

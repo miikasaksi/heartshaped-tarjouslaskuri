@@ -11,6 +11,10 @@ const DEFAULTS = {
   extraCosts: 50,
 };
 
+function isEmbedded() {
+  return new URLSearchParams(window.location.search).get("embed") === "1";
+}
+
 function parseNumber(value) {
   const normalized = String(value).replace(",", ".").trim();
   const number = Number(normalized);
@@ -93,10 +97,30 @@ function clearSummary() {
   });
 }
 
+function sendEmbedHeight() {
+  if (window.parent === window) {
+    return;
+  }
+
+  const root = document.documentElement;
+  const height = Math.ceil(
+    Math.max(root.scrollHeight, document.body ? document.body.scrollHeight : 0),
+  );
+
+  window.parent.postMessage(
+    {
+      type: "heartshaped-calculator-height",
+      height,
+    },
+    "*",
+  );
+}
+
 function calculateAndRender() {
   const result = calculateBreakdown(getValues());
   renderSummary(result);
   document.getElementById("calculateBtn").textContent = "Laske uudelleen";
+  sendEmbedHeight();
 }
 
 document.getElementById("calculatorForm").addEventListener("submit", (event) => {
@@ -113,6 +137,25 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   setDefaultValues();
   clearSummary();
   document.getElementById("calculateBtn").textContent = "Laske tarjous";
+  sendEmbedHeight();
 });
 
+if (isEmbedded()) {
+  document.body.classList.add("embed");
+}
+
 calculateAndRender();
+
+window.addEventListener("load", sendEmbedHeight);
+window.addEventListener("resize", sendEmbedHeight);
+
+const observer = new MutationObserver(() => {
+  sendEmbedHeight();
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true,
+  attributes: true,
+  characterData: true,
+});
