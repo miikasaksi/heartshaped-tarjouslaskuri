@@ -17,32 +17,22 @@
 
     <section class="card">
       <form id="calculatorForm" novalidate>
-        <details class="pdf-settings">
-          <summary>PDF-tarjouksen tiedot (valinnainen)</summary>
-          <div class="pdf-meta">
-            <label class="field">
-              <span>Asiakas / yritys</span>
-              <input type="text" id="clientName" placeholder="Esim. Supercell Oy" />
-            </label>
-            <label class="field">
-              <span>Tapahtuma / tilaisuus</span>
-              <input type="text" id="eventName" placeholder="Esim. Koru-workshop" />
-            </label>
-            <label class="field">
-              <span>Tapahtumapäivä</span>
-              <input type="text" id="eventDate" placeholder="Esim. 30.1.2026" />
-            </label>
-            <label class="field">
-              <span>Tarjouksen päiväys</span>
-              <input type="text" id="offerDate" placeholder="Esim. 23.2.2026" />
-            </label>
-          </div>
-        </details>
-
         <div class="field-grid">
           <label class="field">
             <span>Hinta / osallistuja (€)</span>
-            <input type="number" id="pricePerParticipant" min="0" step="0.01" value="42" />
+            <select id="pricingModel">
+              <option value="54">Perus-workshop = 54 €</option>
+              <option value="38">Rannekoru + sormus -workshop = 38 € / henkilö</option>
+              <option value="custom">Hinta per osallistuja (oma)</option>
+            </select>
+            <input
+              type="number"
+              id="customPricePerParticipant"
+              class="is-hidden"
+              min="0"
+              step="0.01"
+              placeholder="Kirjoita oma hinta € / osallistuja"
+            />
           </label>
 
           <label class="field">
@@ -58,11 +48,7 @@
           <label class="field">
             <span>Henkilökunnan bruttopalkka / tunti (€)</span>
             <input type="number" id="staffHourly" min="0" step="0.01" value="20" />
-          </label>
-
-          <label class="field">
-            <span>Työnantajakustannukset (%)</span>
-            <input type="number" id="employerPercent" min="0" step="0.1" value="23" />
+            <small class="inline-help">Työnantajakustannukset lisätään automaattisesti: 23 %.</small>
           </label>
 
           <label class="field">
@@ -71,24 +57,25 @@
           </label>
 
           <label class="field">
-            <span>Matkakulut (€)</span>
-            <input type="number" id="travelCosts" min="0" step="0.01" value="35" />
+            <span>Matkakulut (km / suunta)</span>
+            <input type="number" id="travelKmOneWay" min="0" step="0.1" value="0" />
+            <small class="inline-help">Lasketaan automaattisesti: 1,50 €/km × 2 (meno-paluu).</small>
           </label>
 
           <label class="field">
             <span>Lisäkustannukset (€)</span>
             <input type="number" id="extraCosts" min="0" step="0.01" value="50" />
+            <small class="inline-help">(Extra-helmitilaukset tai muut materiaalikulut tms.)</small>
           </label>
         </div>
 
         <aside class="note">
-          <p><strong>Huom:</strong> Henkilökunnan tuntikustannukseen lisätään työnantajan sivukulut (oletus 23 %), jotta tarjous vastaa studioyhtiön todellista kustannusta Suomessa.</p>
-          <p>Arvio sisältää mm. TyEL-, sosiaaliturva-, työttömyys-, tapaturma- ja ryhmähenkivakuutusmaksuja. Tarkista lopullinen prosentti omalta palkanlaskennalta.</p>
+          <p><strong>Huom:</strong> Työnantajakustannukset on laskurissa kiinteä 23 % henkilökunnan bruttopalkan päälle.</p>
+          <p>Matkakulut arvioidaan syötetyn kilometrimäärän mukaan (km/suunta), oletuksella 1,50 €/km ja meno-paluu.</p>
         </aside>
 
         <div class="actions">
           <button id="calculateBtn" type="submit" class="btn btn-primary">Laske tarjous</button>
-          <button id="savePdfBtn" type="button" class="btn btn-secondary">Tallenna PDF</button>
           <button id="resetBtn" type="button" class="btn btn-ghost">Tyhjennä</button>
         </div>
       </form>
@@ -98,9 +85,10 @@
 
         <div class="summary-row"><span>Osallistujat yhteensä</span><strong id="participantsTotal">-</strong></div>
         <div class="summary-row"><span>Henkilökunnan palkat (brutto)</span><strong id="staffGross">-</strong></div>
-        <div class="summary-row"><span>Työnantajakustannukset</span><strong id="employerCosts">-</strong></div>
+        <div class="summary-row"><span>Työnantajakustannukset (23 %)</span><strong id="employerCosts">-</strong></div>
         <div class="summary-row"><span>Henkilökunta yhteensä</span><strong id="staffTotal">-</strong></div>
-        <div class="summary-row"><span>Muut kulut</span><strong id="otherCosts">-</strong></div>
+        <div class="summary-row"><span>Matkakulut (meno-paluu)</span><strong id="travelTotal">-</strong></div>
+        <div class="summary-row"><span>Lisäkustannukset</span><strong id="extrasTotal">-</strong></div>
         <div class="summary-row"><span>Välisumma (ALV 0 %)</span><strong id="subtotal">-</strong></div>
         <div class="summary-row"><span>ALV (25,5 %)</span><strong id="vat">-</strong></div>
         <div class="summary-row total"><span>Yhteensä</span><strong id="total">-</strong></div>
@@ -108,7 +96,6 @@
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
