@@ -17,7 +17,7 @@
 
 body {
   margin: 0;
-  padding: 16px;
+  padding: 12px;
   background: var(--bg);
   color: var(--text);
   font-family: "Manrope", sans-serif;
@@ -29,7 +29,7 @@ body {
 }
 
 .eyebrow {
-  margin: 8px 0 6px;
+  margin: 6px 0 4px;
   text-align: center;
   font-size: 12px;
   letter-spacing: 0.09em;
@@ -42,16 +42,16 @@ h1 {
   text-align: center;
   color: var(--accent);
   font-family: "Playfair Display", serif;
-  font-size: clamp(36px, 5vw, 52px);
+  font-size: clamp(30px, 4.2vw, 42px);
   line-height: 1.1;
 }
 
 .lead {
-  margin: 10px auto 24px;
+  margin: 8px auto 18px;
   max-width: 760px;
   text-align: center;
   color: var(--muted);
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .card {
@@ -59,7 +59,7 @@ h1 {
   border: 1px solid var(--surface-border);
   border-radius: 20px;
   box-shadow: 0 8px 26px rgba(105, 65, 89, 0.08);
-  padding: 22px;
+  padding: 18px;
 }
 
 .field-grid {
@@ -75,7 +75,7 @@ h1 {
 }
 
 .field span {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -84,8 +84,8 @@ input {
   border: 1px solid var(--input-border);
   background: var(--input-bg);
   border-radius: 14px;
-  padding: 12px 14px;
-  font-size: 18px;
+  padding: 10px 12px;
+  font-size: 14px;
   font-family: "Manrope", sans-serif;
   color: var(--text);
 }
@@ -106,7 +106,7 @@ input:focus {
 
 .note p {
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -125,9 +125,9 @@ input:focus {
 .btn {
   border: 1px solid transparent;
   border-radius: 14px;
-  padding: 10px 18px;
+  padding: 8px 14px;
   font-family: "Manrope", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: 0.18s ease;
@@ -175,7 +175,7 @@ input:focus {
 
 .summary h2 {
   margin: 0 0 10px;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 1.1;
   font-family: "Playfair Display", serif;
   color: var(--accent);
@@ -191,12 +191,12 @@ input:focus {
 }
 
 .summary-row span {
-  font-size: 16px;
+  font-size: 14px;
   color: #6d626d;
 }
 
 .summary-row strong {
-  font-size: 16px;
+  font-size: 14px;
   color: #443a44;
   font-weight: 700;
   white-space: nowrap;
@@ -226,7 +226,7 @@ input:focus {
   }
 
   .lead {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .field span,
@@ -235,12 +235,12 @@ input:focus {
   .note p,
   .summary-row span,
   .summary-row strong {
-    font-size: 15px;
+    font-size: 13px;
   }
 
   .summary h2,
   .eyebrow {
-    font-size: 24px;
+    font-size: 20px;
   }
 }
 
@@ -250,15 +250,26 @@ body.embed {
 }
 
 body.embed .page {
-  max-width: none;
+  max-width: 980px;
+  margin: 0 auto;
 }
 
 body.embed .eyebrow {
-  margin-top: 0;
+  display: none;
+}
+
+body.embed h1 {
+  display: none;
+}
+
+body.embed .lead {
+  display: none;
 }
 
 body.embed .card {
   box-shadow: none;
+  border-radius: 14px;
+  padding: 14px;
 }
 
 @media print {
