@@ -17,6 +17,28 @@
 
     <section class="card">
       <form id="calculatorForm" novalidate>
+        <details class="pdf-settings">
+          <summary>PDF-tarjouksen tiedot (valinnainen)</summary>
+          <div class="pdf-meta">
+            <label class="field">
+              <span>Asiakas / yritys</span>
+              <input type="text" id="clientName" placeholder="Esim. Supercell Oy" />
+            </label>
+            <label class="field">
+              <span>Tapahtuma / tilaisuus</span>
+              <input type="text" id="eventName" placeholder="Esim. Koru-workshop" />
+            </label>
+            <label class="field">
+              <span>Tapahtumapäivä</span>
+              <input type="text" id="eventDate" placeholder="Esim. 30.1.2026" />
+            </label>
+            <label class="field">
+              <span>Tarjouksen päiväys</span>
+              <input type="text" id="offerDate" placeholder="Esim. 23.2.2026" />
+            </label>
+          </div>
+        </details>
+
         <div class="field-grid">
           <label class="field">
             <span>Hinta / osallistuja (€)</span>
@@ -86,6 +108,7 @@
     </section>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
   <script src="../script.js"></script>
 </body>
 </html>
