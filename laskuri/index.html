@@ -1,131 +1,91 @@
-
 <!DOCTYPE html>
 <html lang="fi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Heart Shaped Studio - Tarjouslaskuri</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Playfair Display', serif;
-      background-color: #fff0f5;
-      color: #333;
-      margin: 2em;
-      padding: 2em;
-      border-radius: 16px;
-      box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h1 {
-      color: #FE5BA1;
-      border-bottom: 2px solid #FE5BA1;
-      padding-bottom: 0.2em;
-    }
-    label {
-      font-weight: bold;
-      margin-top: 1em;
-    }
-    input {
-      display: block;
-      margin-top: 0.2em;
-      margin-bottom: 1em;
-      padding: 0.5em;
-      width: 100%;
-      max-width: 400px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-family: 'Playfair Display', serif;
-    }
-    button {
-      padding: 0.6em 1.2em;
-      font-size: 1em;
-      border: none;
-      cursor: pointer;
-      font-family: 'Playfair Display', serif;
-      border-radius: 8px;
-      margin-top: 1em;
-    }
-    #calculate {
-      background-color: #FE5BA1;
-      color: white;
-    }
-    #reset {
-      background-color: #ddd;
-      color: black;
-      margin-left: 1em;
-    }
-    #result {
-      margin-top: 2em;
-      font-size: 1.2em;
-      background-color: #fff;
-      padding: 1em;
-      border-radius: 8px;
-      border: 1px solid #FE5BA1;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <h1>Tarjouslaskuri</h1>
-  <label for="price">Hinta per osallistuja (€):</label>
-  <input type="number" id="price" />
+  <main class="page">
+    <p class="eyebrow">HEART SHAPED STUDIO OY</p>
+    <h1>Tarjouslaskuri · koru-workshopit</h1>
+    <p class="lead">Selkeä tarjous asiakkaalle, sisältäen myös henkilöstön todelliset työnantajakustannukset.</p>
 
-  <label for="participants">Osallistujien määrä:</label>
-  <input type="number" id="participants" />
+    <section class="card">
+      <form id="calculatorForm" novalidate>
+        <div class="field-grid">
+          <label class="field">
+            <span>Hinta / osallistuja (€)</span>
+            <input type="number" id="pricePerParticipant" min="0" step="0.01" value="42" />
+          </label>
 
-  <label for="staff">Henkilökunnan määrä:</label>
-  <input type="number" id="staff" />
+          <label class="field">
+            <span>Osallistujien määrä</span>
+            <input type="number" id="participants" min="0" step="1" value="30" />
+          </label>
 
-  <label for="staffcost">Henkilökunnan hinta / tunti (€):</label>
-  <input type="number" id="staffcost" />
+          <label class="field">
+            <span>Henkilökunnan määrä</span>
+            <input type="number" id="staffCount" min="0" step="1" value="2" />
+          </label>
 
-  <label for="duration">Tapahtuman kesto (tunteina):</label>
-  <input type="number" id="duration" />
+          <label class="field">
+            <span>Henkilökunnan bruttopalkka / tunti (€)</span>
+            <input type="number" id="staffHourly" min="0" step="0.01" value="20" />
+          </label>
 
-  <label for="travel">Matkakulut (€):</label>
-  <input type="number" id="travel" />
+          <label class="field">
+            <span>Työnantajakustannukset (%)</span>
+            <input type="number" id="employerPercent" min="0" step="0.1" value="23" />
+          </label>
 
-  <label for="extras">Lisäkustannukset (€):</label>
-  <input type="number" id="extras" />
+          <label class="field">
+            <span>Tapahtuman kesto (h)</span>
+            <input type="number" id="durationHours" min="0" step="0.25" value="4" />
+          </label>
 
-  <div>
-    <button id="calculate" onclick="calculate()">Laske tarjous</button>
-    <button id="reset" onclick="resetForm()">Tyhjennä</button>
-  </div>
+          <label class="field">
+            <span>Matkakulut (€)</span>
+            <input type="number" id="travelCosts" min="0" step="0.01" value="35" />
+          </label>
 
-  <div id="result"></div>
+          <label class="field">
+            <span>Lisäkustannukset (€)</span>
+            <input type="number" id="extraCosts" min="0" step="0.01" value="50" />
+          </label>
+        </div>
 
-  <script>
-    function calculate() {
-      const price = parseFloat(document.getElementById("price").value) || 0;
-      const participants = parseInt(document.getElementById("participants").value) || 0;
-      const staff = parseInt(document.getElementById("staff").value) || 0;
-      const staffcost = parseFloat(document.getElementById("staffcost").value) || 0;
-      const duration = parseFloat(document.getElementById("duration").value) || 0;
-      const travel = parseFloat(document.getElementById("travel").value) || 0;
-      const extras = parseFloat(document.getElementById("extras").value) || 0;
+        <aside class="note">
+          <p><strong>Huom:</strong> Henkilökunnan tuntikustannukseen lisätään työnantajan sivukulut (oletus 23 %), jotta tarjous vastaa studioyhtiön todellista kustannusta Suomessa.</p>
+          <p>Arvio sisältää mm. TyEL-, sosiaaliturva-, työttömyys-, tapaturma- ja ryhmähenkivakuutusmaksuja. Tarkista lopullinen prosentti omalta palkanlaskennalta.</p>
+        </aside>
 
-      const base = price * participants;
-      const staffTotal = staff * staffcost * duration;
-      const subtotal = base + staffTotal + travel + extras;
-      const vat = subtotal * 0.255;
-      const total = subtotal + vat;
+        <div class="actions">
+          <button id="calculateBtn" type="submit" class="btn btn-primary">Laske tarjous</button>
+          <button id="savePdfBtn" type="button" class="btn btn-secondary">Tallenna PDF</button>
+          <button id="resetBtn" type="button" class="btn btn-ghost">Tyhjennä</button>
+        </div>
+      </form>
 
-      document.getElementById("result").innerHTML = `
-        Hinta ilman ALV: ${subtotal.toFixed(2)} €<br>
-        ALV (25,5%): ${vat.toFixed(2)} €<br>
-        <strong>Yhteensä: ${total.toFixed(2)} €</strong>
-      `;
-      document.getElementById("calculate").innerText = "Laske uudelleen";
-    }
+      <section class="summary" aria-live="polite">
+        <h2>Yhteenveto</h2>
 
-    function resetForm() {
-      document.querySelectorAll("input").forEach(input => input.value = '');
-      document.getElementById("result").innerHTML = '';
-      document.getElementById("calculate").innerText = "Laske tarjous";
-    }
-  </script>
+        <div class="summary-row"><span>Osallistujat yhteensä</span><strong id="participantsTotal">-</strong></div>
+        <div class="summary-row"><span>Henkilökunnan palkat (brutto)</span><strong id="staffGross">-</strong></div>
+        <div class="summary-row"><span>Työnantajakustannukset</span><strong id="employerCosts">-</strong></div>
+        <div class="summary-row"><span>Henkilökunta yhteensä</span><strong id="staffTotal">-</strong></div>
+        <div class="summary-row"><span>Muut kulut</span><strong id="otherCosts">-</strong></div>
+        <div class="summary-row"><span>Välisumma (ALV 0 %)</span><strong id="subtotal">-</strong></div>
+        <div class="summary-row"><span>ALV (25,5 %)</span><strong id="vat">-</strong></div>
+        <div class="summary-row total"><span>Yhteensä</span><strong id="total">-</strong></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="../script.js"></script>
 </body>
 </html>
