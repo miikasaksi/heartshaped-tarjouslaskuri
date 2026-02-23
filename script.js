@@ -223,7 +223,7 @@ function drawOfferMainPage(doc, meta, values, result) {
     `${meta.eventName} ${meta.clientName} -asiakkaalle.`,
     `Tapahtumapäivä: ${meta.eventDate}`,
     `Osallistujia noin: ${Math.round(values.participants)}`,
-    `Henkilökuntaa: ${Math.round(values.staffCount)}`,
+    `Henkilökunta: ${Math.round(values.staffCount)}`,
     `Kesto: ${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 2 }).format(values.durationHours)} h`,
   ];
 
@@ -250,7 +250,7 @@ function drawOfferMainPage(doc, meta, values, result) {
   doc.setFontSize(10.5);
   const includesText = textLines(
     doc,
-    `Sisaltaa: ${Math.round(values.staffCount)} henkiloa avustamaan, materiaalit ${Math.round(values.participants)} osallistujalle, seka tapahtuman valmistelu ja purku.`,
+    `Sisältää: ${Math.round(values.staffCount)} henkilöä avustamaan, materiaalit ${Math.round(values.participants)} osallistujalle sekä tapahtuman valmistelun ja purun.`,
     leftWidth,
   );
   doc.text(includesText, leftX, y);
@@ -258,7 +258,7 @@ function drawOfferMainPage(doc, meta, values, result) {
   y += includesText.length * 5.2 + 8;
   const termsText = textLines(
     doc,
-    "Maksuehdot: Laskutus 30 % etukateen ja 70 % tapahtuman jalkeen. Tarjous voimassa 14 paivaa.",
+    "Maksuehdot: Laskutus 30 % etukäteen ja 70 % tapahtuman jälkeen. Tarjous voimassa 14 päivää.",
     leftWidth,
   );
   doc.text(termsText, leftX, y);
@@ -279,22 +279,22 @@ function drawOfferMainPage(doc, meta, values, result) {
   rowY += 9;
   drawValueRow(doc, rightX + 4, rowY, rightWidth - 8, "Sivukulut", formatEuro(result.employerCosts));
   rowY += 9;
-  drawValueRow(doc, rightX + 4, rowY, rightWidth - 8, "Henkilokunta", formatEuro(result.staffTotal));
+  drawValueRow(doc, rightX + 4, rowY, rightWidth - 8, "Henkilökunta", formatEuro(result.staffTotal));
   rowY += 9;
   drawValueRow(doc, rightX + 4, rowY, rightWidth - 8, "Muut kulut", formatEuro(result.otherCosts));
   rowY += 9;
-  drawValueRow(doc, rightX + 4, rowY, rightWidth - 8, "Valisumma", formatEuro(result.subtotal));
+  drawValueRow(doc, rightX + 4, rowY, rightWidth - 8, "Välisumma", formatEuro(result.subtotal));
   rowY += 9;
   drawValueRow(doc, rightX + 4, rowY, rightWidth - 8, "ALV 25,5 %", formatEuro(result.vat));
   rowY += 9;
-  drawValueRow(doc, rightX + 4, rowY, rightWidth - 8, "Yhteensa", formatEuro(result.total), true);
+  drawValueRow(doc, rightX + 4, rowY, rightWidth - 8, "Yhteensä", formatEuro(result.total), true);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9.2);
   doc.setTextColor(99, 86, 99);
   const note = textLines(
     doc,
-    `Laskelmassa tyonantajakustannukset ${formatPercent(values.employerPercent)} ja ALV 25,5 %.`,
+    `Laskelmassa työnantajakustannukset ${formatPercent(values.employerPercent)} ja ALV 25,5 %.`,
     rightWidth - 8,
   );
   doc.text(note, rightX + 4, 201);
@@ -308,7 +308,7 @@ function drawProcessPage(doc) {
   doc.setTextColor(31, 31, 35);
   doc.setFont("times", "normal");
   doc.setFontSize(16);
-  doc.text("NAIN KORUPAJA TOIMII", 105, 28, { align: "center" });
+  doc.text("NÄIN KORUPAJA TOIMII", 105, 28, { align: "center" });
 
   const steps = [
     {
@@ -326,7 +326,7 @@ function drawProcessPage(doc) {
     {
       no: "3",
       title: "Valmis koru",
-      body: "Rannekoru, avaimenpera tai puhelinkoru valmistuu mukaan vietavaksi.",
+      body: "Rannekoru, avaimenperä tai puhelinkoru valmistuu mukaan vietäväksi.",
       x: 174,
     },
   ];
